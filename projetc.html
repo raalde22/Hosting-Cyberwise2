@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+ 
+  <title>Fitness Tracker</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Fitness Tracker</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        
+        <li><a href="calorie-counter.html">Calorie Counter</a></li>
+       
+        <li><a href="exercise-demonstrations.html">Exercise Demonstrations</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="welcome">
+      <h2>Welcome to Fitness Tracker!</h2>
+      <p id="greeting">Track your fitness and exercise routines.</p>
+      <p>Track your fitness and exercise routines.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Fitness Tracker</p>
+  </footer>
+
+  <script src="script.js">
+    document.addEventListener("DOMContentLoaded", function () {
+   
+   var greetingElement = document.getElementById("greeting");
+
+   
+   var currentHour = new Date().getHours();
+
+   
+   var greeting;
+   if (currentHour < 12) {
+      greeting = "Good morning!";
+   } else if (currentHour < 18) {
+      greeting = "Good afternoon!";
+   } else {
+      greeting = "Good evening!";
+   }
+
+   
+   greetingElement.textContent = greeting + " " + greetingElement.textContent;
+});
+
+  </script>
+</body>
+
+</html>
+

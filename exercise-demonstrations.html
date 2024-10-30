@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise Tracker</title>
+  
+
+</head>
+<body>
+   
+    <header>
+      <img src="نص_فقرتك-removebg-preview.png" style = "width: 100px; height: 100px"
+  align = "right"> 
+    <h1>Fitness Tracker</h1>
+    <nav>
+      <ul style = "position:fixed; left:660px;" >
+
+        <li><a href="index.html">Home</a></li>
+        
+        <li><a href="calorie-counter.html">Calorie Counter</a></li>
+       
+        <li><a href="exercise-demonstrations.html">Exercise Demonstrations</a></li>
+      </ul>
+    </nav>
+    
+  </header>
+  
+  <h1>Exercise Tracker</h1>
+
+  <div class="exercise-form">
+    <form id="exerciseForm">
+      <input type="text" id="exerciseName" placeholder="Exercise Name" required>
+      <input type="number" id="exerciseDistance" placeholder="Distance (in km)" step="0.01" required>
+      <input type="number" id="exerciseTime" placeholder="Time (in minutes)" required>
+      <input type="submit" value="Add Exercise">
+    </form>
+  </div>
+
+  <div class="exercise-history">
+    <h2>Exercise History</h2>
+    <table id="exerciseTable">
+      <thead>
+        <tr>
+          <th>Exercise Name</th>
+          <th>Sets (km)</th>
+          <th>Time (mins)</th>
+        </tr>
+      </thead>
+      <tbody id="exerciseBody">
+      </tbody>
+    </table>
+  </div>
+  <img src="تمارين-removebg-preview.png" style = "width: 400px; height: 300px"
+  align = "left">
+  <script>
+    // Function to add exercise to the table and local storage
+    function addExercise() {
+      const exerciseName = document.getElementById('exerciseName').value;
+      const exerciseDistance = document.getElementById('exerciseDistance').value;
+      const exerciseTime = document.getElementById('exerciseTime').value;
+
+      // Create table row
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${exerciseName}</td>
+        <td>${exerciseDistance}</td>
+        <td>${exerciseTime}</td>
+      `;
+
+      // Append row to the table
+      const exerciseTable = document.getElementById('exerciseBody');
+      exerciseTable.appendChild(row);
+
+      // Clear the form
+      document.getElementById('exerciseForm').reset();
+
+      // Save exercise to local storage
+      const exerciseData = {
+        name: exerciseName,
+        distance: exerciseDistance,
+        time: exerciseTime
+      };
+      const exercises = JSON.parse(localStorage.getItem('exercises')) || [];
+      exercises.push(exerciseData);
+      localStorage.setItem('exercises', JSON.stringify(exercises));
+    }
+
+    // Function to load exercises from local storage
+    function loadExercises() {
+      const exercises = JSON.parse(localStorage.getItem('exercises')) || [];
+      const exerciseTable = document.getElementById('exerciseBody');
+
+      exercises.forEach((exercise) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${exercise.name}</td>
+          <td>${exercise.distance}</td>
+          <td>${exercise.time}</td>
+        `;
+        exerciseTable.appendChild(row);
+      });
+    }
+
+    // Event listener for form submission
+    document.getElementById('exerciseForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      addExercise();
+    });
+
+    // Load exercises on page load
+    document.addEventListener('DOMContentLoaded', function () {
+      loadExercises();
+    });
+  </script>
+  
+</body>
+</html>
